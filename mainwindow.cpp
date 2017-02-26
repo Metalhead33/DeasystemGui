@@ -44,10 +44,10 @@ void MainWindow::RefreshEditorType()
     if(!cur_elem) ui->stackedWidget->hide();
     else
     {
-        if(cur_elem->IsDirectory()) ui->stackedWidget->hide();
+        ui->stackedWidget->show();
+        if(cur_elem->IsDirectory()) ui->stackedWidget->setCurrentIndex(3);
         else
         {
-          ui->stackedWidget->show();
           Dea::File* temp_file = (Dea::File*)cur_elem;
           switch(temp_file->GetFiletype())
           {

@@ -22,10 +22,23 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1" colspan="2">
+    <item row="0" column="2" colspan="3">
+     <widget class="QLineEdit" name="NameEditor"/>
+    </item>
+    <item row="0" column="0" rowspan="3">
+     <widget class="QTreeView" name="treeView"/>
+    </item>
+    <item row="1" column="2">
+     <widget class="QDialogButtonBox" name="ElementNameButton">
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" colspan="3">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="ContextEditorLine">
        <layout class="QGridLayout" name="gridLayout_5">
@@ -87,19 +100,99 @@
         </item>
        </layout>
       </widget>
-     </widget>
-    </item>
-    <item row="0" column="2" colspan="3">
-     <widget class="QLineEdit" name="NameEditor"/>
-    </item>
-    <item row="0" column="0" rowspan="3">
-     <widget class="QTreeView" name="treeView"/>
-    </item>
-    <item row="1" column="2">
-     <widget class="QDialogButtonBox" name="ElementNameButton">
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-      </property>
+      <widget class="QWidget" name="NewFile">
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QLineEdit" name="NewFileName"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QComboBox" name="FiletypeSelector">
+          <item>
+           <property name="text">
+            <string>Directory</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Boolean</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>8-bit signed integer</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>16-bit signed integer</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>32-bit signed integer</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>64-bit signed integer</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>8-bit unsigned integer</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>16-bit unsigned integer</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>32-bit unsigned integer</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>64-bit unsigned integer</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>32-bit floating point number</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>64-bit floating point number</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>8-bit string</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>16-bit string</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>32-bit string</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QDialogButtonBox" name="ApproveNewFile">
+          <property name="standardButtons">
+           <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>

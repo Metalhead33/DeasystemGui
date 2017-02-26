@@ -32,3 +32,5 @@ HEADERS  += mainwindow.hpp \
     FilesystemContainer.hpp
 
 FORMS    += mainwindow.ui
+
+DISTFILES +=
