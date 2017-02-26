@@ -26,10 +26,23 @@ private slots:
 
     void on_ElementNameButton_rejected();
 
+    void on_LineEditorBox_accepted();
+
+    void on_LineEditorBox_rejected();
+
+    void on_TexteditBox_accepted();
+
+    void on_TexteditBox_rejected();
+
+    void on_comboButton_accepted();
+
+    void on_comboButton_rejected();
+
 private:
     Ui::MainWindow *ui;
     Dea::Element* cur_elem;
     void RefreshEditorType();
+    void AcceptChange();
 };
 
 #endif // MAINWINDOW_HPP

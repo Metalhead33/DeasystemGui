@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Dea::StdStream* strm = new Dea::StdStream("/home/metalhead33/NetBeansProjects/Filesystem2/dist/Debug/CLang-Linux/test.raw");
     container->Unserialize(strm);
     ui->treeView->setModel(container);
+    ui->stackedWidget->hide();
 }
 
 MainWindow::~MainWindow()
@@ -154,7 +155,167 @@ void MainWindow::RefreshEditorType()
             ui->plainTextEdit->setPlainText(QString::fromStdU32String(*((Dea::String32File*)temp_file)->GetContent()  ) );
             break;
         }
+          default:
+              break;
           }
     }
     }
+}
+void MainWindow::AcceptChange()
+{
+    if(!cur_elem) return;
+    else
+    {
+        if(cur_elem->IsDirectory()) return;
+        else
+        {
+          Dea::File* temp_file = (Dea::File*)cur_elem;
+          switch(temp_file->GetFiletype())
+          {
+            case Dea::boolean :
+          {
+              ((Dea::BoolFile*)temp_file)->SetContent(ui->comboBox->currentIndex() > 0);
+              break;
+          }
+          case Dea::int8 :
+        {
+              try {
+                  ((Dea::Int8File*)temp_file)->SetContent( (int8_t)std::stoi(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::int16 :
+        {
+              try {
+                  ((Dea::Int16File*)temp_file)->SetContent( (int16_t)std::stoi(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::int32 :
+        {
+              try {
+                  ((Dea::Int32File*)temp_file)->SetContent( (int32_t)std::stoi(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::int64 :
+        {
+              try {
+                  ((Dea::Int64File*)temp_file)->SetContent( (int64_t)std::stoi(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::uint8 :
+        {
+              try {
+                  ((Dea::Uint8File*)temp_file)->SetContent( (uint8_t)std::stoi(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::uint16 :
+        {
+              try {
+                  ((Dea::Uint16File*)temp_file)->SetContent( (uint16_t)std::stoi(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::uint32 :
+        {
+              try {
+                  ((Dea::Uint32File*)temp_file)->SetContent( (uint32_t)std::stoi(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::uint64 :
+        {
+              try {
+                  ((Dea::Uint64File*)temp_file)->SetContent( (uint64_t)std::stoi(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::float32 :
+        {
+              try {
+                  ((Dea::FloatFile*)temp_file)->SetContent( (float)std::stof(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::float64 :
+        {
+              try {
+                  ((Dea::DoubleFile*)temp_file)->SetContent( (double)std::stod(ui->lineEdit->text().toStdString() ) );
+              } catch (std::exception e) {
+                  ;
+              }
+            break;
+        }
+          case Dea::string8 :
+        {
+            ((Dea::String8File*)temp_file)->SetContent(ui->plainTextEdit->toPlainText().toStdString());
+            break;
+        }
+          case Dea::string16 :
+        {
+            ((Dea::String16File*)temp_file)->SetContent(ui->plainTextEdit->toPlainText().toStdU16String());
+            break;
+        }
+          case Dea::string32 :
+        {
+              ((Dea::String32File*)temp_file)->SetContent(ui->plainTextEdit->toPlainText().toStdU32String());
+            break;
+        }
+          default:
+              break;
+          }
+    }
+    }
+    RefreshEditorType();
+}
+
+void MainWindow::on_LineEditorBox_accepted()
+{
+    AcceptChange();
+}
+
+void MainWindow::on_LineEditorBox_rejected()
+{
+    RefreshEditorType();
+}
+
+void MainWindow::on_TexteditBox_accepted()
+{
+    AcceptChange();
+}
+
+void MainWindow::on_TexteditBox_rejected()
+{
+    RefreshEditorType();
+}
+
+void MainWindow::on_comboButton_accepted()
+{
+    AcceptChange();
+}
+
+void MainWindow::on_comboButton_rejected()
+{
+    RefreshEditorType();
 }
