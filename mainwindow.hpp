@@ -17,9 +17,14 @@ public:
     ~MainWindow();
 
 private slots:
+
     void on_treeView_clicked(const QModelIndex &index);
 
     void on_NameEditor_editingFinished();
+
+    void on_ElementNameButton_accepted();
+
+    void on_ElementNameButton_rejected();
 
 private:
     Ui::MainWindow *ui;
