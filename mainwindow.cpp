@@ -20,15 +20,16 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_treeView_clicked(const QModelIndex &index)
 {
-    //cur_index = index;
-    cur_elem = (Dea::Element*)index.internalPointer();
-    ui->NameEditor->setText(QString::fromStdString(cur_elem->GetName()));
+    cur_elem = index;
+    Dea::Element* temp_elem = (Dea::Element*)cur_elem.internalPointer();
+    ui->NameEditor->setText(QString::fromStdString(temp_elem->GetName()));
     RefreshEditorType();
 }
 
 void MainWindow::on_NameEditor_editingFinished()
 {
-    if(cur_elem) cur_elem->SetName(ui->NameEditor->text().toStdString());
+    Dea::Element* temp_elem = (Dea::Element*)cur_elem.internalPointer();
+    if(temp_elem) temp_elem->SetName(ui->NameEditor->text().toStdString());
 }
 
 void MainWindow::on_ElementNameButton_accepted()
@@ -38,24 +39,26 @@ void MainWindow::on_ElementNameButton_accepted()
 
 void MainWindow::on_ElementNameButton_rejected()
 {
-    if(cur_elem) ui->NameEditor->setText(QString::fromStdString(cur_elem->GetName()));
+    Dea::Element* temp_elem = (Dea::Element*)cur_elem.internalPointer();
+    if(temp_elem) ui->NameEditor->setText(QString::fromStdString(temp_elem->GetName()));
 }
 void MainWindow::RefreshEditorType()
 {
-    if(!cur_elem) ui->stackedWidget->hide();
+    Dea::Element* temp_elem = (Dea::Element*)cur_elem.internalPointer();
+    if(!temp_elem) ui->stackedWidget->hide();
     else
     {
         ui->stackedWidget->show();
-        if(cur_elem->IsDirectory()) ui->stackedWidget->setCurrentIndex(3);
+        if(temp_elem->IsDirectory()) ui->stackedWidget->setCurrentIndex(3);
         else
         {
-          Dea::File* temp_file = (Dea::File*)cur_elem;
+          Dea::File* temp_file = (Dea::File*)temp_elem;
           switch(temp_file->GetFiletype())
           {
             case Dea::boolean :
           {
               ui->stackedWidget->setCurrentIndex(2);
-              ui->comboBox->setCurrentIndex((int)((Dea::BoolFile*)cur_elem)->GetContent() );
+              ui->comboBox->setCurrentIndex((int)((Dea::BoolFile*)temp_file)->GetContent() );
               break;
           }
           case Dea::int8 :
@@ -164,13 +167,14 @@ void MainWindow::RefreshEditorType()
 }
 void MainWindow::AcceptChange()
 {
-    if(!cur_elem) return;
+    Dea::Element* temp_elem = (Dea::Element*)cur_elem.internalPointer();
+    if(!temp_elem) return;
     else
     {
-        if(cur_elem->IsDirectory()) return;
+        if(temp_elem->IsDirectory()) return;
         else
         {
-          Dea::File* temp_file = (Dea::File*)cur_elem;
+          Dea::File* temp_file = (Dea::File*)temp_elem;
           switch(temp_file->GetFiletype())
           {
             case Dea::boolean :
@@ -323,5 +327,13 @@ void MainWindow::on_comboButton_rejected()
 
 void MainWindow::on_ApproveNewFile_clicked()
 {
-    //((FilesystemContainer*)ui->treeView->model())->AddElement(cur_index,ui->NewFileName->text(),ui->FiletypeSelector->currentIndex());
+    ((FilesystemContainer*)ui->treeView->model())->AddElement(cur_elem,ui->NewFileName->text(),ui->FiletypeSelector->currentIndex());
+}
+
+void MainWindow::on_DeleteFile_clicked()
+{
+    QModelIndex temp_elem = cur_elem;
+    cur_elem = cur_elem.parent();
+    RefreshEditorType();
+    if(cur_elem.isValid()) ui->treeView->model()->removeRow(temp_elem.row(),temp_elem.parent());
 }

@@ -40,10 +40,11 @@ private slots:
 
     void on_ApproveNewFile_clicked();
 
+    void on_DeleteFile_clicked();
+
 private:
     Ui::MainWindow *ui;
-    Dea::Element* cur_elem;
-    //QModelIndex cur_indexer;
+    QModelIndex cur_elem;
     void RefreshEditorType();
     void AcceptChange();
 };
