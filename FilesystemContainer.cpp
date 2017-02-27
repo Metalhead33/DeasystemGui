@@ -87,3 +87,142 @@ bool FilesystemContainer::removeRows(int row, int count, const QModelIndex &pare
     }
     else return false;
 }
+
+bool FilesystemContainer::AddElement(const QModelIndex &parent,QString name,int8_t type)
+{
+    if(name.isEmpty()) return false;
+    if(parent.isValid())
+    {
+        if( ((Dea::Directory*)parent.internalPointer())->PGetByName(name.toStdString() ) ) return false; //We don't overwrite.
+        switch(type)
+        {
+        case 0:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Directory((Dea::Directory*)parent.internalPointer(),name.toStdString());
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 1:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::BoolFile((Dea::Directory*)parent.internalPointer(),name.toStdString(),false);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 2:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Int8File((Dea::Directory*)parent.internalPointer(),name.toStdString(),0);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 3:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Int16File((Dea::Directory*)parent.internalPointer(),name.toStdString(),0);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 4:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Int32File((Dea::Directory*)parent.internalPointer(),name.toStdString(),0);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 5:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Int64File((Dea::Directory*)parent.internalPointer(),name.toStdString(),0);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 6:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Uint8File((Dea::Directory*)parent.internalPointer(),name.toStdString(),0);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 7:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Uint16File((Dea::Directory*)parent.internalPointer(),name.toStdString(),0);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 8:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Uint32File((Dea::Directory*)parent.internalPointer(),name.toStdString(),0);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 9:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::Uint64File((Dea::Directory*)parent.internalPointer(),name.toStdString(),0);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 10:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::FloatFile((Dea::Directory*)parent.internalPointer(),name.toStdString(),0.00);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 11:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::DoubleFile((Dea::Directory*)parent.internalPointer(),name.toStdString(),0.00);
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 12:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::String8File((Dea::Directory*)parent.internalPointer(),name.toStdString(),"");
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 13:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::String16File((Dea::Directory*)parent.internalPointer(),name.toStdString(),u"");
+            endInsertRows();
+            return true;
+            break;
+        }
+        case 14:
+        {
+            beginInsertRows(parent,parent.row()+1,parent.row()+1);
+            new Dea::String32File((Dea::Directory*)parent.internalPointer(),name.toStdString(),U"");
+            endInsertRows();
+            return true;
+            break;
+        }
+        default:
+        {
+            return false;
+            break;
+        }
+        }
+        return true;
+    }
+    else return false;
+}

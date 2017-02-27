@@ -38,9 +38,12 @@ private slots:
 
     void on_comboButton_rejected();
 
+    void on_ApproveNewFile_clicked();
+
 private:
     Ui::MainWindow *ui;
     Dea::Element* cur_elem;
+    //QModelIndex cur_indexer;
     void RefreshEditorType();
     void AcceptChange();
 };

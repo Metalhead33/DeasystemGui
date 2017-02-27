@@ -20,6 +20,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_treeView_clicked(const QModelIndex &index)
 {
+    //cur_index = index;
     cur_elem = (Dea::Element*)index.internalPointer();
     ui->NameEditor->setText(QString::fromStdString(cur_elem->GetName()));
     RefreshEditorType();
@@ -318,4 +319,9 @@ void MainWindow::on_comboButton_accepted()
 void MainWindow::on_comboButton_rejected()
 {
     RefreshEditorType();
+}
+
+void MainWindow::on_ApproveNewFile_clicked()
+{
+    //((FilesystemContainer*)ui->treeView->model())->AddElement(cur_index,ui->NewFileName->text(),ui->FiletypeSelector->currentIndex());
 }

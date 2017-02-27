@@ -15,7 +15,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
     //bool AddElement(const QModelIndex &parent,Structure::Element* elem);
-    //bool AddDirectory(const QModelIndex &parent,QString name);
+    bool AddElement(const QModelIndex &parent,QString name,int8_t type);
     //bool AddFile(const QModelIndex &parent,Structure::File::FileType type, QString name);
 };
 
